@@ -37,11 +37,13 @@ class Program
     static readonly string DisciplinasFile = Path.Combine(BaseDir, "Disciplinas.dat");
     static readonly string MatriculasFile = Path.Combine(BaseDir, "Matriculas.dat");
     static readonly CultureInfo Invariant = CultureInfo.InvariantCulture;
-    static readonly Encoding UTF8 = new UTF8Encoding(false);
+    static readonly Encoding FileEncoding = Encoding.GetEncoding(1252);
 
     static void Main()
     {
-        Console.OutputEncoding = Encoding.UTF8;
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        Console.OutputEncoding = Encoding.GetEncoding(1252);
+        Console.InputEncoding = Encoding.GetEncoding(1252);
         CarregarArquivos();
 
         bool rodando = true;
@@ -86,7 +88,7 @@ class Program
     {
         if (File.Exists(AlunosFile))
         {
-            foreach (var linha in File.ReadAllLines(AlunosFile, UTF8))
+            foreach (var linha in File.ReadAllLines(AlunosFile, FileEncoding))
             {
                 if (string.IsNullOrWhiteSpace(linha)) continue;
                 var p = linha.Split(';');
@@ -99,7 +101,7 @@ class Program
 
         if (File.Exists(DisciplinasFile))
         {
-            foreach (var linha in File.ReadAllLines(DisciplinasFile, UTF8))
+            foreach (var linha in File.ReadAllLines(DisciplinasFile, FileEncoding))
             {
                 if (string.IsNullOrWhiteSpace(linha)) continue;
                 var p = linha.Split(';');
@@ -112,7 +114,7 @@ class Program
 
         if (File.Exists(MatriculasFile))
         {
-            foreach (var linha in File.ReadAllLines(MatriculasFile, UTF8))
+            foreach (var linha in File.ReadAllLines(MatriculasFile, FileEncoding))
             {
                 if (string.IsNullOrWhiteSpace(linha)) continue;
                 var p = linha.Split(';');
@@ -131,16 +133,16 @@ class Program
     static void SalvarArquivos()
     {
         File.WriteAllLines(AlunosFile,
-            alunos.Select(a => $"{a.Matricula};{a.Nome};{a.Idade}"), UTF8);
+            alunos.Select(a => $"{a.Matricula};{a.Nome};{a.Idade}"), FileEncoding);
 
         File.WriteAllLines(DisciplinasFile,
-            disciplinas.Select(d => $"{d.Codigo};{d.Nome};{d.NotaMinima.ToString(Invariant)}"), UTF8);
+            disciplinas.Select(d => $"{d.Codigo};{d.Nome};{d.NotaMinima.ToString(Invariant)}"), FileEncoding);
 
         File.WriteAllLines(MatriculasFile,
             matriculas.Select(m =>
                 $"{m.CodDisciplina};{m.MatriculaAluno};" +
                 $"{(m.Nota1.HasValue ? m.Nota1.Value.ToString(Invariant) : "")};" +
-                $"{(m.Nota2.HasValue ? m.Nota2.Value.ToString(Invariant) : "")}"), UTF8);
+                $"{(m.Nota2.HasValue ? m.Nota2.Value.ToString(Invariant) : "")}"), FileEncoding);
     }
 
     // MENUS 
