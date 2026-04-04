@@ -1,8 +1,7 @@
 using System.Globalization;
 using System.Text;
 
-// ─── MODELOS ─────────────────────────────────────────────────────────────────
-
+// MODELOS 
 class Aluno
 {
     public int Matricula { get; set; }
@@ -26,8 +25,7 @@ class Matricula
     public double? Media => (Nota1.HasValue && Nota2.HasValue) ? (Nota1.Value + Nota2.Value) / 2.0 : null;
 }
 
-// ─── PROGRAMA ─────────────────────────────────────────────────────────────────
-
+//  PROGRAMA
 class Program
 {
     static List<Aluno> alunos = new();
@@ -82,7 +80,7 @@ class Program
         Console.WriteLine("Programa encerrado.");
     }
 
-    // ─── LEITURA E GRAVAÇÃO DOS ARQUIVOS ─────────────────────────────────────
+    // LEITURA E GRAVAÇÃO DOS ARQUIVOS 
 
     static void CarregarArquivos()
     {
@@ -145,7 +143,7 @@ class Program
                 $"{(m.Nota2.HasValue ? m.Nota2.Value.ToString(Invariant) : "")}"), UTF8);
     }
 
-    // ─── MENUS ───────────────────────────────────────────────────────────────
+    // MENUS 
 
     static void MenuConsultas()
     {
@@ -154,10 +152,10 @@ class Program
         {
             LimparTela();
             Console.WriteLine("=== Consultas ===");
-            Console.WriteLine("  i.   Alunos");
-            Console.WriteLine("  ii.  Disciplinas");
-            Console.WriteLine("  iii. Alunos da Disciplina");
-            Console.WriteLine("  iv.  Disciplinas do Aluno");
+            Console.WriteLine("  1.   Alunos");
+            Console.WriteLine("  2.  Disciplinas");
+            Console.WriteLine("  3. Alunos da Disciplina");
+            Console.WriteLine("  4.  Disciplinas do Aluno");
             Console.WriteLine("  0.   Voltar");
             Console.Write("Opção: ");
 
@@ -180,10 +178,10 @@ class Program
         {
             LimparTela();
             Console.WriteLine("=== Cadastros ===");
-            Console.WriteLine("  i.   Alunos");
-            Console.WriteLine("  ii.  Disciplinas");
-            Console.WriteLine("  iii. Matrículas");
-            Console.WriteLine("  iv.  Atribuir Nota a Aluno");
+            Console.WriteLine("  1.   Alunos");
+            Console.WriteLine("  2.  Disciplinas");
+            Console.WriteLine("  3. Matrículas");
+            Console.WriteLine("  4.  Atribuir Nota a Aluno");
             Console.WriteLine("  0.   Voltar");
             Console.Write("Opção: ");
 
@@ -199,7 +197,7 @@ class Program
         }
     }
 
-    // ─── CONSULTAS ───────────────────────────────────────────────────────────
+    // CONSULTAS 
 
     static void ConsultarAlunos()
     {
@@ -321,7 +319,7 @@ class Program
         Pausar();
     }
 
-    // ─── CADASTROS ───────────────────────────────────────────────────────────
+    // CADASTROS
 
     static void CadastrarAluno()
     {
@@ -452,7 +450,7 @@ class Program
         Pausar();
     }
 
-    // ─── AUXILIARES ──────────────────────────────────────────────────────────
+    // AUXILIARES
 
     static Aluno? BuscarAluno(string entrada)
     {
